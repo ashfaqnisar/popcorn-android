@@ -51,7 +51,6 @@ import okhttp3.Response;
 
 import javax.inject.Inject;
 
-import butter.droid.BuildConfig;
 import butter.droid.MobileButterApplication;
 import butter.droid.R;
 import butter.droid.activities.base.ButterBaseActivity;
@@ -70,6 +69,7 @@ import butter.droid.fragments.NavigationDrawerFragment;
 import butter.droid.utils.ToolbarUtils;
 import butter.droid.widget.ScrimInsetsFrameLayout;
 import butterknife.BindView;
+import timber.log.BuildConfig;
 import timber.log.Timber;
 
 /**

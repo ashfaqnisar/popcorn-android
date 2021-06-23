@@ -67,6 +67,7 @@ public class BeamPlayerActivity extends ButterBaseActivity implements VideoPlaye
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
 
         MobileButterApplication.getAppContext()

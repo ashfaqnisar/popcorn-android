@@ -42,6 +42,7 @@ public class AboutActivity extends ButterBaseActivity implements AboutFragment.O
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         MobileButterApplication.getAppContext()
                 .getComponent()
                 .inject(this);
