@@ -55,6 +55,14 @@ public class MoviesProvider extends MediaProvider {
     }
 
     @Override
+    public ArrayList<Media> getResponseDetailsFormattedList(String responseStr) throws IOException {
+        ArrayList<Movie> formattedData = new ArrayList<>();
+        Movie detail = mapper.readValue(responseStr, Movie.class);
+        formattedData.add(detail);
+        return new MovieResponse(formattedData).formatListForPopcorn(context, new ArrayList<>(), this, getSubsProvider());
+    }
+
+    @Override
     public int getLoadingMessage() {
         return R.string.loading_movies;
     }
