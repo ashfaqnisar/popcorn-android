@@ -122,8 +122,8 @@ public class TVStreamLoadingFragment extends BaseStreamLoadingFragment {
 			public void run() {
                 Timber.d("DEBXX: " + status.toString());
 				progressIndicator.setIndeterminate(false);
-				progressIndicator.setProgress(Math.round(status.progress));
-                mPrimaryTextView.setText(getString(R.string.buffer_progress_percent, Math.round(status.progress)));
+				progressIndicator.setProgress(Math.round(status.bufferProgress));
+                mPrimaryTextView.setText(getString(R.string.buffer_progress_percent, Math.round(status.bufferProgress)));
 
 				if (status.downloadSpeed / 1024 < 1000) {
                     mSecondaryTextView.setText(getString(R.string.download_speed_kb, df.format(status.downloadSpeed / 1024)));
