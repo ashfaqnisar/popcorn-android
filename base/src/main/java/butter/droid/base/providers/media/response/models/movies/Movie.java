@@ -3,6 +3,7 @@ package butter.droid.base.providers.media.response.models.movies;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.JsonNode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +36,7 @@ public class Movie extends ResponseItem {
     @JsonProperty("certification")
     private String certification;
     @JsonProperty("torrents")
-    private Torrents torrents;
+    private JsonNode torrents;
     @JsonProperty("genres")
     private List<String> genres = new ArrayList<>();
     @JsonProperty("images")
@@ -178,14 +179,18 @@ public class Movie extends ResponseItem {
     /**
      * @return The torrents
      */
-    public Torrents getTorrents() {
-        return torrents;
+    public JsonNode getTorrents() {
+        if (torrents.isArray()) {
+            return  null;
+        } else {
+            return torrents;
+        }
     }
 
     /**
      * @param torrents The torrents
      */
-    public void setTorrents(Torrents torrents) {
+    public void setTorrents(JsonNode torrents) {
         this.torrents = torrents;
     }
 

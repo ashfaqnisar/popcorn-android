@@ -174,12 +174,22 @@ public class TVSearchFragment extends androidx.leanback.app.SearchFragment
 	}
 
 	private void addRow(String title, List<MediaCardPresenter.MediaCardItem> items) {
-		mRowsAdapter.remove(mLoadingRow);
+		mHandler.post(new Runnable() {
+			@Override
+			public void run() {
+				mRowsAdapter.remove(mLoadingRow);
+			}
+		});
 
 		HeaderItem header = new HeaderItem(0, title);
 		ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(new MediaCardPresenter(getActivity()));
 		listRowAdapter.addAll(0, items);
-		mRowsAdapter.add(new ListRow(header, listRowAdapter));
+		mHandler.post(new Runnable() {
+			@Override
+			public void run() {
+				mRowsAdapter.add(new ListRow(header, listRowAdapter));
+			}
+		});
 	}
 
 	private void addLoadingRow() {

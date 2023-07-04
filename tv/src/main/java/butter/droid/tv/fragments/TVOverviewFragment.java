@@ -133,7 +133,11 @@ public class TVOverviewFragment extends BrowseFragment implements OnItemViewClic
     @Override
     public void onItemSelected(Presenter.ViewHolder itemViewHolder, Object item, RowPresenter.ViewHolder rowViewHolder, Row row) {
         mSelectedRow = mRowsAdapter.indexOf(row);
-
+        if (mSelectedRow == 0 || mSelectedRow == 2) {
+            providerManager.setCurrentProviderType(ProviderManager.PROVIDER_TYPE_MOVIE);
+        } else if (mSelectedRow == 1 || mSelectedRow == 3) {
+            providerManager.setCurrentProviderType(ProviderManager.PROVIDER_TYPE_SHOW);
+        }
         if (item instanceof MediaCardPresenter.MediaCardItem) {
             MediaCardPresenter.MediaCardItem overviewItem = (MediaCardPresenter.MediaCardItem) item;
             if (overviewItem.isLoading()) return;

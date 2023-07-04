@@ -108,7 +108,12 @@ public class TVMovieDetailsFragment extends TVBaseDetailsFragment implements Med
 			String content_language = PrefUtils.get(getActivity(), Prefs.CONTENT_LOCALE, language);
 			String locale = LocaleUtils.toLocale(content_language).getLanguage();
 
-			List<String> qualities = new ArrayList<>(movie.torrents.get(locale).keySet());
+			List<String> qualities;
+			if (movie.torrents != null && movie.torrents.size() > 0) {
+				qualities = new ArrayList<>(movie.torrents.get(locale).keySet());
+			} else {
+				qualities = new ArrayList<>(1);
+			}
 
 			if (movie.trailer != null) {
 				addAction(new TrailerAction(qualities.size() + 1, getResources().getString(R.string.watch),
