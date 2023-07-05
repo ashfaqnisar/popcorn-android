@@ -3,6 +3,9 @@ package butter.droid.base.providers.media.response;
 import android.content.Context;
 import android.util.Log;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,6 +19,7 @@ import butter.droid.base.providers.media.response.models.common.Locale;
 import butter.droid.base.providers.media.response.models.movies.Language;
 import butter.droid.base.providers.media.response.models.movies.Movie;
 import butter.droid.base.providers.media.response.models.movies.Quality;
+import butter.droid.base.providers.media.response.models.movies.Torrents;
 import butter.droid.base.providers.subs.SubsProvider;
 import butter.droid.base.utils.PrefUtils;
 import butter.droid.base.utils.StringUtils;
@@ -65,7 +69,15 @@ public class MovieResponse extends Response<Movie> {
             }
 
             if (item.getTorrents() != null) {
-                for (Map.Entry<String, Language> language : item.getTorrents().getLanguages().entrySet()) {
+                ObjectMapper mapper = new ObjectMapper();
+                Torrents torrents;
+                try {
+                    torrents = mapper.readValue(item.getTorrents().toString(), Torrents.class);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    torrents = new Torrents();
+                }
+                for (Map.Entry<String, Language> language : torrents.getLanguages().entrySet()) {
                     Map<String, Media.Torrent> torrentMap = new HashMap<>();
                     for (Map.Entry<String, Quality> torrentQuality : language.getValue().getQualities().entrySet()) {
                         if (torrentQuality == null) continue;
